@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startLogin } from '../actions/auth';
+import { ipcRenderer } from "electron"
 
 export const LoginPage = ({ startLogin }) => (
   <div className="box-layout">
@@ -15,5 +16,8 @@ export const LoginPage = ({ startLogin }) => (
 const mapDispatchToProps = (dispatch) => ({
   startLogin: () => dispatch(startLogin())
 });
+
+ipcRenderer.send("google-oauth","getToken");
+
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);
